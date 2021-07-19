@@ -1,9 +1,10 @@
-const Product = require('../models/product')
+const { Product } = require('../models/product')
 const express = require('express')
 const router = express.Router()
 
 router.get(`/`, async (req, res) => {
     const productList = await Product.find()
+
     if (!productList) {
         res.status(500).json({ success: false })
     }
@@ -16,6 +17,7 @@ router.post(`/`, (req, res) => {
         image: req.body.image,
         countInStock: req.body.countInStock,
     })
+
     product
         .save()
         .then((createdProduct) => {
