@@ -5,8 +5,12 @@ const router = express.Router()
 const mongoose = require('mongoose')
 
 router.get(`/`, async (req, res) => {
-    const productList = await Product.find()
-        .select('name image -_id')
+    let filter = {}
+    if (req.query.categories) {
+        filter = { category: req.query.categories.split(',') }
+    }
+    const productList = await Product.find(filter)
+        // .select('name image -_id')
         .populate('category')
 
     if (!productList) {
