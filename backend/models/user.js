@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -23,31 +23,34 @@ const userSchema = mongoose.Schema({
     },
     street: {
         type: String,
-        deafult: '',
+        default: ''
     },
     apartment: {
         type: String,
-        default: '',
+        default: ''
     },
-    zip: {
+    zip :{
         type: String,
-        default: '',
+        default: ''
     },
     city: {
         type: String,
-        default: '',
+        default: ''
     },
     country: {
         type: String,
-        default: '',
-    },
-})
+        default: ''
+    }
+
+});
 
 userSchema.virtual('id').get(function () {
-    return this._id.toHexString()
-})
+    return this._id.toHexString();
+});
 
 userSchema.set('toJSON', {
     virtuals: true,
-})
-exports.User = mongoose.model('User', userSchema)
+});
+
+exports.User = mongoose.model('User', userSchema);
+exports.userSchema = userSchema;
